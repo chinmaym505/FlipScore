@@ -14,7 +14,7 @@ function waitForCondition(condition, action) {
 var start = 0;
 var tempo = 0;
 app.get("/",(req,res) => {
-res.send("welcome!");
+res.sendFile(__dirname+"/home.html");
 });
 app.get("/pages/music-1.png",(req,res) => {
 res.sendFile(__dirname+'/pages/music-1.png')
