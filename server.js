@@ -1,5 +1,7 @@
 const express = require("express");
 const console = require("console");
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://Web_App:MBagqM4A9sB0EvsJ@cluster0.va4jut6.mongodb.net/?retryWrites=true&w=majority";
 const app = express();
 function waitForCondition(condition, action) {
     // Check if the condition is true
@@ -22,16 +24,7 @@ res.sendFile(__dirname+'/pages/music-1.png')
 app.get("/pages/music-2.png",(req,res) => {
     res.sendFile(__dirname+'/pages/music-2.png')
     });
-app.get("/data", (req, res) => {
-    start = 1;
-    tempo = req.query.tempo;
-    console.log(tempo);
-    console.log(start);
-});
-app.get('/data2', (req, res) => {
- 
-    res.json({tempo:tempo}); // pass the data variable as the argument
-  });
+
 app.get("/musician", (req, res) => {
     
     waitForCondition(function() {
@@ -46,7 +39,25 @@ app.get("/musician", (req, res) => {
 app.get("/conductor", (req, res) => {
     res.sendFile(__dirname + "/conductor.html");
 });
-
+app.get("/login", (req, res) => {
+    res.send("log in page")
+});
+app.get("/signup", (req, res) => {
+    res.send("sign up page")
+});
+app.get("/data", (req, res) => {
+    start = 1;
+    tempo = req.query.tempo;
+    console.log(tempo);
+    console.log(start);
+});
+app.get('/data2', (req, res) => {
+ 
+    res.json({tempo:tempo}); // pass the data variable as the argument
+});
+app.post('/data3',(req,res) => {
+    const { username, password } = req.body;
+});
 app.listen(3000, () => {
     console.log("App listening on port 3000");
 });
