@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <title>Music sheet page turning</title>
+  </head>
+  <body>
+    <!--This draws the canvas on the webpage -->
+    <canvas id="mycanvas"></canvas>
+  </body>
+  <!-- Include the processing.js library -->
+  <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
+  <script>
+    
+    function start(tempo) {
+      var programCode = function (processingInstance) {
+        with (processingInstance) {
+          size(window.innerWidth, window.innerHeight);
+          frameRate(30);
+          var page1 = loadImage("/pages/music-1.png");
+          var page2 = loadImage("/pages/music-2.png");
+          var beatsPerSecond = tempo / 60;
+          var pages = [page1, page2];
+          var i = 0;
+          var x = 365;
+          console.log(tempo);
+          draw = function () {
+            if(i>3){
+              noLoop();
+              console.log("done");
+            }else{
+            if (x > 1184) {
+              x = 365;
+              i++;
+            }
+            
+            background(255, 255, 255);
+            image(pages[i], 300, 200);
+
+
+            strokeWeight(5);
+            line(x, 229, x, 262);
+            x += beatsPerSecond/.5555;
+          }
+          };
+        }
+      };
+          // Get the canvas that ProcessingJS will use
+    var canvas = document.getElementById("mycanvas");
+    // Pass the function to ProcessingJS constructor
+    var processingInstance = new Processing(canvas, programCode);
+    }
+  
+    var tempo=0;
+    fetch('/data2')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      //tempo is updated
+      tempo = parseInt(`${data.tempo}`);
+      //start function is called with the updated tempo
+      start(tempo);
+    })
+    .catch(error => {
+      // handle the error
+      console.error(error);
+    });
+    
+</script>
+</html>

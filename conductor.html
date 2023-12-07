@@ -1,0 +1,30 @@
+<html>
+
+<head>
+  <title>Music sheet page turning</title>
+</head>
+
+<body>
+  <!--This draws the canvas on the webpage -->
+
+  <canvas id="mycanvas"></canvas>
+</body>
+<!-- Include the processing.js library -->
+<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
+<!-- Include the jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  var tempo = prompt("Tempo:");
+  function start(){
+    $.get("/data", {tempo: tempo}, function(data) {
+      
+      
+  
+    });
+    $('#start').removeAttr("onclick");
+      $('#start').replaceWith("<h1>started</h1>");
+  };
+</script>
+<button id="start" onclick="start();">start</button>
+
+</html>
