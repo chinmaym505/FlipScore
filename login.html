@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>POST DEMO</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<body>
+	<form>
+		<div>
+			<label>Username</label>
+			<input type="text" id="user" />
+		</div>
+		<div>
+			<label>Password</label>
+			<input type="password" id="pass" />
+		</div>
+		<button type="submit">Submit</button>
+	</form>
+
+	<script>
+		$("button").click(function () {
+			// Get the values from the input elements with IDs "user" and "pass"
+			var username = $("#user").val();
+			var password = $("#pass").val();
+
+			// Create an object of data to send
+			var data = {
+				username: username,
+				password: password
+			};
+
+			// Make a post request to the URL "/data3"
+			$.post("/data3", data, function (response) {
+				// Handle the response here
+				console.log(response);
+			}, "json");
+		});
+
+	</script>
+</body>
+
+</html>

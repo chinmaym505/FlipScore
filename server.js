@@ -40,7 +40,7 @@ app.get("/conductor", (req, res) => {
     res.sendFile(__dirname + "/conductor.html");
 });
 app.get("/login", (req, res) => {
-    res.send("log in page")
+    res.sendFile(__dirname + "/login.html")
 });
 app.get("/signup", (req, res) => {
     res.send("sign up page")
@@ -56,7 +56,12 @@ app.get('/data2', (req, res) => {
     res.json({tempo:tempo}); // pass the data variable as the argument
 });
 app.post('/data3',(req,res) => {
-    const { username, password } = req.body;
+    const username = req.body.username;
+    const password = req.body.password;
+    res.send({
+        username,
+        password,
+      });
 });
 app.listen(3000, () => {
     console.log("App listening on port 3000");
