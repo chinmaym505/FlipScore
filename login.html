@@ -1,45 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-	<meta charset="UTF-8" />
-	<title>POST DEMO</title>
+  <title>HTML Form</title>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+
+  function redirectPOST(url, email, password) {
+
+    var form = $('<form style="display: none" action="' + url + '" method="post">' +
+
+      '<input type="text" name="email" value="' + email + '"/>' +
+      '<input type="text" name="password" value="' + password + '"/>' +
+
+      '</form>');
+    $('body').append(form);
+    form.submit();
+  }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <body>
-	<form>
-		<div>
-			<label>Username</label>
-			<input type="text" id="user" />
-		</div>
-		<div>
-			<label>Password</label>
-			<input type="password" id="pass" />
-		</div>
-		<button type="submit">Submit</button>
-	</form>
+  <form method="POST" action="/submit">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    <button type="button" onclick="sendRequest()">Submit</button>
+  </form>
+  <div id="response"></div>
+  <script>
+    // Define a function to handle the response from the server
+    function sendRequest() {
+      // Create a new XMLHttpRequest object
+      var xhr = new XMLHttpRequest();
 
-	<script>
-		$("button").click(function () {
-			// Get the values from the input elements with IDs "user" and "pass"
-			var username = $("#user").val();
-			var password = $("#pass").val();
+      // Get the input values from the form
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
 
-			// Create an object of data to send
-			var data = {
-				username: username,
-				password: password
-			};
+      // Create a URL-encoded string with the input data
+      var data = "username=" + username + "&password=" + password;
 
-			// Make a post request to the URL "/data3"
-			$.post("/data3", data, function (response) {
-				// Handle the response here
-				console.log(response);
-			}, "json");
-		});
+      // Open a POST request to the server
+      xhr.open("POST", "/data3");
 
-	</script>
+      // Set the request header to indicate the content type
+      
+      // Set the onreadystatechange property to specify a callback function
+      xhr.onreadystatechange = function () {
+        // Check if the response is ready and the status is OK
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          // Get the response data from the server as JSON
+          var response = xhr.responseText;
+         
+
+
+
+        }
+      };
+
+      // Send the request with the data
+      xhr.send(data);
+    }
+  </script>
 </body>
 
 </html>

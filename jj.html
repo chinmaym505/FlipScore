@@ -1,0 +1,22 @@
+<html>
+<head>
+  <title>HTML Form</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+  function redirectPOST(url,name,email){
+   
+var form = $('<form style="display: none" action="' + url + '" method="post">' +
+  
+  '<input type="text" name="name" value="'+name+'"/>' +
+  '<input type="text" name="email" value="'+email+'"/>' +
+  '</form>');
+$('body').append(form);
+form.submit();
+}</script>
+
+<body>
+  
+  <button onclick='redirectPOST("/submit","your","mom")'>hi</button>
+</body>
+</html>
